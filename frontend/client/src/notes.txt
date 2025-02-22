@@ -1,0 +1,138 @@
+import React from 'react';
+ import './Signup.css'; // Import the CSS file for styles
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+function Signup() {
+const[name, setName] = useState(0)
+const[email, setEmail] = useState(0)
+const[password, setPassword] = useState(0)
+
+const handleSubmit = (e) => {
+     e.preventDefault()
+     axios.post("http://localhost/register",{name, email, password})
+     .then(result => console.log(result))
+     .catch(err => console.log(err));
+     }
+
+  return (
+    <div className="signup-container">
+      <div className="signup-form">
+        <h2>register</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name"><strong>Name</strong></label>
+            <input type="text" placeholder="Enter Name" autoComplete="off" name="name" className="form-control" onChange={(e) => setName(e.target.vaue)}/>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email"><strong>Email</strong></label>
+            <input type="text" placeholder="Enter Email" autoComplete="off" name="email" className="form-control" onChange={(e) => setEmail(e.target.vaue)}/>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password"><strong>Password</strong></label>
+            <input type="password" placeholder="Enter Password" autoComplete="off" name="password" className="form-control" onChange={(e) => setPassword(e.target.vaue)}/>
+          </div>
+
+          <button type="submit" className="btn btn-register">register</button></form>
+          <p>Already Have an Account?</p>
+          
+          <Link to="/login" className="btn btn-login">Login</Link>
+      </div>
+    </div>
+  );
+}
+
+export default Signup;
+/* Signup.css */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    flex-wrap: wrap; /* Background color */
+    flex-direction: column;
+  }
+  
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 400px; /* Maximum width for the form */
+    margin: auto;
+  }
+  
+  .signup-form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 100%; /* Full width */
+  }
+  
+  h2 {
+    text-align: center; /* Centered title */
+    margin-bottom: 20px;
+    background-color: antiquewhite; /* Space below the title */
+    border-radius: 50px;
+    
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Space between form groups */
+  }
+  
+  label {
+    display: block; /* Block display for labels */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold text for labels */
+  }
+  
+  .form-control {
+    width: 100%; /* Full width input fields */
+    padding: 10px; /* Padding for inputs */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Includes padding in width */
+  }
+  
+  .btn {
+    width: 100%; /* Full width buttons */
+    padding: 10px; /* Padding for buttons */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Pointer cursor */
+    font-weight: bold; /* Bold text */
+  }
+  
+  .btn-register {
+    background-color: #28a745; /* Green background for register button */
+    color: #ffffff; /* White text */
+  }
+  
+  .btn-login {
+    background-color: #007bff; /* Blue background for login button */
+    color: #ffffff; /* White text */
+    margin-top: 10px;
+    text-align: center;
+    justify-content: center;
+    margin-left: 150px; /* Space above login button */
+  }
+  p{
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    opacity: 0.9; /* Slight transparency on hover */
+  }
+  
+  @media (max-width: 480px) {
+    .signup-container {
+      padding: 20px; /* Extra padding on small screens */
+    }
+  }
